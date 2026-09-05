@@ -165,9 +165,21 @@ h2 {
 
 /* ============================================================
    MOBILE
-   Text flows naturally into the blank upper area of the image.
-   The photograph follows the text, but is pulled upward so its
-   empty wall area sits behind the lower part of the copy.
+   Composition:
+   1. Title on the clean cream background
+   2. Cropped photograph
+   3. Photograph fades at the bottom
+   4. Story continues on the cream background
+   5. CTA / sign-off follows
+
+   No HTML changes are required. The existing .m-hero__text
+   becomes display: contents so its children can be reordered
+   visually with CSS Grid.
+   ============================================================ */
+/* ============================================================
+   MOBILE
+   Final CSS-only test:
+   title → story → cropped image → fade → CTA
    ============================================================ */
 
 .desktop-hero {
@@ -183,58 +195,106 @@ h2 {
   background: #f5e8d5;
 }
 
+
 /* ------------------------------------------------------------
    MOBILE HERO
    ------------------------------------------------------------ */
 
 .m-hero {
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
   width: 100%;
+  overflow: hidden;
   background: #f5e8d5;
   line-height: normal;
 }
 
-/* ------------------------------------------------------------
-   MOBILE TEXT
-   ------------------------------------------------------------ */
 
+/* Let title, rule, and story become separate grid items */
 .m-hero__text {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  padding: 9vh 9vw 5vh;
-  background: #f5e8d5;
+  display: contents;
 }
 
+
 /* ------------------------------------------------------------
-   MOBILE PHOTO
+   TITLE
+   ------------------------------------------------------------ */
 
-   The negative margin pulls the photograph upward behind the
-   lower portion of the text.
+.m-hero__text .ornament {
+  order: 1;
+  margin-top: 7vh;
+  margin-bottom: 14px;
+  padding: 0 8vw;
+}
 
-   Because the image's upper half is mostly empty wall, this
-   creates a seamless transition rather than a hard
-   text → image break.
+.m-hero__text h1 {
+  order: 2;
+  padding: 0 8vw;
+  font-size: clamp(2.35rem, 9vw, 3.2rem);
+}
+
+.m-hero__text > .rule {
+  order: 3;
+  margin-top: 22px;
+  margin-bottom: 24px;
+}
+
+
+/* ------------------------------------------------------------
+   STORY
+   ------------------------------------------------------------ */
+
+.m-hero__text .intro-copy {
+  order: 4;
+
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  padding: 0 9vw 5vh;
+
+  background: #f5e8d5;
+
+  font-size: clamp(1.05rem, 4.1vw, 1.35rem);
+  line-height: 1.38;
+}
+
+.m-hero__text .intro-copy p + p {
+  margin-top: 18px;
+}
+
+
+/* ------------------------------------------------------------
+   CROPPED IMAGE
    ------------------------------------------------------------ */
 
 .m-hero img {
-  position: relative;
-  z-index: 1;
+  order: 5;
+
   display: block;
   width: 100%;
-  height: auto;
-  margin-top: -220px;
-  object-fit: cover;
 
-  /* Fade the bottom of the photograph into the page */
+  /*
+    The image is intentionally shorter than its full height.
+    This crops away some of the blank wall while preserving
+    the important still-life lower portion.
+  */
+  height: clamp(360px, 92vw, 560px);
+
+  object-fit: cover;
+  object-position: center 72%;
+
+  /*
+    Only the final edge fades away.
+    The book, cup, note, flowers, pen, etc. remain visible.
+  */
   -webkit-mask-image:
     linear-gradient(
       to bottom,
       black 0%,
-      black 82%,
-      rgba(0, 0, 0, 0.75) 90%,
+      black 94%,
+      rgba(0, 0, 0, 0.82) 97%,
+      rgba(0, 0, 0, 0.45) 99%,
       transparent 100%
     );
 
@@ -242,43 +302,24 @@ h2 {
     linear-gradient(
       to bottom,
       black 0%,
-      black 82%,
-      rgba(0, 0, 0, 0.75) 90%,
+      black 94%,
+      rgba(0, 0, 0, 0.82) 97%,
+      rgba(0, 0, 0, 0.45) 99%,
       transparent 100%
     );
 }
 
-/* ------------------------------------------------------------
-   MOBILE TYPE
-   ------------------------------------------------------------ */
-
-.mobile-page h1 {
-  font-size: clamp(2.35rem, 9vw, 3.2rem);
-}
-
-.mobile-page .intro-copy {
-  max-width: 540px;
-  margin: 0 auto;
-  font-size: clamp(1.05rem, 4.1vw, 1.35rem);
-}
-
-.mobile-page .intro-copy p + p {
-  margin-top: 18px;
-}
-
-.mobile-page .rule {
-  margin-top: 22px;
-  margin-bottom: 22px;
-}
 
 /* ------------------------------------------------------------
-   MOBILE FOOTER / CTA
+   CTA
    ------------------------------------------------------------ */
 
 .m-footer {
   position: relative;
   z-index: 3;
+
   padding: 7vh 8vw 5vh;
+
   background: #f5e8d5;
 }
 
@@ -299,12 +340,16 @@ h2 {
   font-size: clamp(0.68rem, 2.8vw, 0.85rem);
 }
 
+
+/* ------------------------------------------------------------
+   SIGN-OFF
+   ------------------------------------------------------------ */
+
 .mobile-footer {
   padding: 0 20px 30px;
   background: #f5e8d5;
   font-size: clamp(0.68rem, 2.6vw, 0.8rem);
 }
-
 /* ============================================================
    DESKTOP
    ============================================================ */
@@ -317,11 +362,6 @@ h2 {
     min-height: 100%;
   }
 
-  /*
-    IMPORTANT:
-    The page is no longer locked to one viewport.
-    If the copy needs more room, the page can grow.
-  */
   body {
     overflow-x: hidden;
     overflow-y: auto;
@@ -348,10 +388,6 @@ h2 {
       no-repeat;
   }
 
-  /*
-    Softens the left side of the photograph so the text
-    remains readable without looking like it sits inside a box.
-  */
   .desktop-hero::after {
     position: absolute;
     z-index: 0;
@@ -369,15 +405,6 @@ h2 {
       );
   }
 
-
-  /* ----------------------------------------------------------
-     DESKTOP MESSAGE
-
-     No absolute positioning.
-     No fixed height.
-     Content determines the height.
-     ---------------------------------------------------------- */
-
   .message {
     position: relative;
     z-index: 2;
@@ -388,11 +415,6 @@ h2 {
 
     text-align: center;
   }
-
-
-  /* ----------------------------------------------------------
-     DESKTOP TYPE
-     ---------------------------------------------------------- */
 
   .desktop-hero h1 {
     font-size: clamp(2.7rem, 4.4vw, 4.25rem);
@@ -422,14 +444,6 @@ h2 {
     font-size: clamp(0.64rem, 0.8vw, 0.78rem);
   }
 
-
-  /* ----------------------------------------------------------
-     DESKTOP FOOTER
-
-     It sits at the bottom when there is room,
-     but moves naturally below the content if necessary.
-     ---------------------------------------------------------- */
-
   .desktop-hero .page-footer {
     position: relative;
     z-index: 3;
@@ -445,13 +459,6 @@ h2 {
     font-size: clamp(0.58rem, 0.75vw, 0.75rem);
   }
 
-
-  /* ----------------------------------------------------------
-     MEDIUM DESKTOP
-
-     Give the text more room before shrinking it.
-     ---------------------------------------------------------- */
-
   @media (max-width: 1100px) {
 
     .desktop-hero {
@@ -465,14 +472,6 @@ h2 {
       padding-left: 1rem;
     }
   }
-
-
-  /* ----------------------------------------------------------
-     SHORT SCREENS
-
-     Instead of scaling the whole message to 84%, reduce
-     vertical padding and spacing slightly.
-     ---------------------------------------------------------- */
 
   @media (max-height: 700px) and (min-width: 900px) {
 

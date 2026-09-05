@@ -6,7 +6,7 @@ document.querySelector('#app').innerHTML = `
     <!-- MOBILE -->
     <div class="mobile-page">
       <div class="m-hero">
-        <img src="/hero-mobile-placeholder.png" alt="Book propped against a sunlit wall beside a candle, coffee, and a handwritten note.">
+        <img src="/nmobile-background.png" alt="Book propped against a sunlit wall beside a candle, coffee, and a handwritten note.">
 
         <div class="m-hero__text" aria-labelledby="page-title-m">
           <div class="ornament ornament-top" aria-hidden="true">✦</div>
