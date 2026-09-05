@@ -6,7 +6,7 @@ document.querySelector('#app').innerHTML = `
     <!-- MOBILE: photo banner (text over its blank area, fading at the bottom) then a scrollable footer with the button and sign-off -->
     <div class="mobile-page">
       <div class="m-hero">
-        <img src="/background-image-real.png" alt="21 Lessons book, propped against a sunlit wall beside a candle, coffee, and a handwritten note.">
+        <img src="/hero-mobile-placeholder.png" alt="Book propped against a sunlit wall beside a candle, coffee, and a handwritten note. (Placeholder photo — final cover art to be swapped in.)">
         <div class="m-hero__text" aria-labelledby="page-title-m">
           <div class="ornament ornament-top" aria-hidden="true">✦</div>
           <h1 id="page-title-m">Maybe it's for you.</h1>
