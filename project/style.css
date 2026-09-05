@@ -26,7 +26,9 @@ body {
   background: #f5e8d5;
 }
 
-h1, h2, p {
+h1,
+h2,
+p {
   margin: 0;
 }
 
@@ -117,7 +119,10 @@ h2 {
   letter-spacing: 0.11em;
   line-height: 1.2;
   text-decoration: none;
-  transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .order-button:hover {
@@ -157,131 +162,352 @@ h2 {
   color: #b9852b;
 }
 
+
 /* ============================================================
-   MOBILE (default): scrollable — photo banner fades at the
-   bottom into the page background, button + sign-off sit below
+   MOBILE
+   Text flows naturally into the blank upper area of the image.
+   The photograph follows the text, but is pulled upward so its
+   empty wall area sits behind the lower part of the copy.
    ============================================================ */
 
-.desktop-hero { display: none; }
+.desktop-hero {
+  display: none;
+}
 
 .mobile-page {
   display: block;
   width: 100%;
+  min-height: 100svh;
+  overflow-x: hidden;
   text-align: center;
+  background: #f5e8d5;
 }
+
+/* ------------------------------------------------------------
+   MOBILE HERO
+   ------------------------------------------------------------ */
 
 .m-hero {
   position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  line-height: 0;
+  background: #f5e8d5;
+  line-height: normal;
 }
 
+/* ------------------------------------------------------------
+   MOBILE TEXT
+   ------------------------------------------------------------ */
+
+.m-hero__text {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 9vh 9vw 5vh;
+  background: #f5e8d5;
+}
+
+/* ------------------------------------------------------------
+   MOBILE PHOTO
+
+   The negative margin pulls the photograph upward behind the
+   lower portion of the text.
+
+   Because the image's upper half is mostly empty wall, this
+   creates a seamless transition rather than a hard
+   text → image break.
+   ------------------------------------------------------------ */
+
 .m-hero img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
   height: auto;
-  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 0%, black 80%, transparent 100%);
+  margin-top: -220px;
+  object-fit: cover;
+
+  /* Fade the bottom of the photograph into the page */
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      black 82%,
+      rgba(0, 0, 0, 0.75) 90%,
+      transparent 100%
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black 0%,
+      black 82%,
+      rgba(0, 0, 0, 0.75) 90%,
+      transparent 100%
+    );
 }
 
-.m-hero__text {
-  position: absolute;
-  top: 6%;
-  left: 0;
-  right: 0;
-  padding: 0 8%;
+/* ------------------------------------------------------------
+   MOBILE TYPE
+   ------------------------------------------------------------ */
+
+.mobile-page h1 {
+  font-size: clamp(2.35rem, 9vw, 3.2rem);
 }
 
-.mobile-page h1 { font-size: 8.6vw; }
-.mobile-page .intro-copy { font-size: 3.6vw; }
-.mobile-page .order-button,
-.mobile-page .availability { font-size: 3vw; }
+.mobile-page .intro-copy {
+  max-width: 540px;
+  margin: 0 auto;
+  font-size: clamp(1.05rem, 4.1vw, 1.35rem);
+}
+
+.mobile-page .intro-copy p + p {
+  margin-top: 18px;
+}
+
+.mobile-page .rule {
+  margin-top: 22px;
+  margin-bottom: 22px;
+}
+
+/* ------------------------------------------------------------
+   MOBILE FOOTER / CTA
+   ------------------------------------------------------------ */
 
 .m-footer {
-  padding: 6vh 8vw 4vh;
+  position: relative;
+  z-index: 3;
+  padding: 7vh 8vw 5vh;
+  background: #f5e8d5;
 }
 
-.m-footer h2 { font-size: 6.5vw; }
-.m-footer .subheading { font-size: 3.6vw; }
-.m-footer .order-button { font-size: 3.4vw; padding: 13px 26px; }
-.m-footer .availability { font-size: 2.8vw; }
+.m-footer h2 {
+  font-size: clamp(1.9rem, 7vw, 2.5rem);
+}
+
+.m-footer .subheading {
+  font-size: clamp(1rem, 4vw, 1.3rem);
+}
+
+.m-footer .order-button {
+  font-size: clamp(0.78rem, 3.4vw, 1rem);
+  padding: 13px 26px;
+}
+
+.m-footer .availability {
+  font-size: clamp(0.68rem, 2.8vw, 0.85rem);
+}
 
 .mobile-footer {
-  padding: 0 20px 26px;
-  font-size: 2.6vw;
+  padding: 0 20px 30px;
+  background: #f5e8d5;
+  font-size: clamp(0.68rem, 2.6vw, 0.8rem);
 }
 
 /* ============================================================
-   DESKTOP (900px+): original full-bleed, single-viewport hero
+   DESKTOP
    ============================================================ */
-@media (min-width: 900px) {
-  html, body, #app { height: 100%; }
-  body { overflow: hidden; }
 
-  .mobile-page { display: none; }
+@media (min-width: 900px) {
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  /*
+    IMPORTANT:
+    The page is no longer locked to one viewport.
+    If the copy needs more room, the page can grow.
+  */
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .mobile-page {
+    display: none;
+  }
 
   .desktop-hero {
-    display: block;
     position: relative;
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    min-height: 560px;
+    min-height: 100dvh;
     overflow: hidden;
     isolation: isolate;
-    background: #f3e4d0 url('/background-image-real.png') center center / cover no-repeat;
+
+    background:
+      #f3e4d0
+      url('/background-image-real.png')
+      center center /
+      cover
+      no-repeat;
   }
 
+  /*
+    Softens the left side of the photograph so the text
+    remains readable without looking like it sits inside a box.
+  */
   .desktop-hero::after {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     inset: 0;
     content: '';
-    background: linear-gradient(90deg, rgba(250, 238, 221, 0.14) 0%, rgba(250, 238, 221, 0.03) 50%, rgba(255, 242, 220, 0) 70%);
     pointer-events: none;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(250, 238, 221, 0.22) 0%,
+        rgba(250, 238, 221, 0.10) 38%,
+        rgba(250, 238, 221, 0.025) 62%,
+        rgba(255, 242, 220, 0) 76%
+      );
   }
 
+
+  /* ----------------------------------------------------------
+     DESKTOP MESSAGE
+
+     No absolute positioning.
+     No fixed height.
+     Content determines the height.
+     ---------------------------------------------------------- */
+
   .message {
-    position: absolute;
-    top: 7.8%;
-    left: 4.2%;
+    position: relative;
+    z-index: 2;
+
     width: min(42%, 570px);
-    min-width: 420px;
+    margin-left: 4.2%;
+    padding: clamp(3.5rem, 7.8vh, 6rem) 1.5rem 3rem;
+
     text-align: center;
   }
 
-  .desktop-hero h1 { font-size: clamp(2.7rem, 4.4vw, 4.25rem); }
-  .desktop-hero .intro-copy { font-size: clamp(1.18rem, 1.65vw, 1.6rem); }
-  .desktop-hero h2 { font-size: clamp(1.65rem, 2.5vw, 2.45rem); }
-  .desktop-hero .subheading { font-size: clamp(1rem, 1.45vw, 1.35rem); }
-  .desktop-hero .order-button { font-size: clamp(0.72rem, 0.9vw, 0.88rem); }
-  .desktop-hero .availability { font-size: clamp(0.64rem, 0.8vw, 0.78rem); }
+
+  /* ----------------------------------------------------------
+     DESKTOP TYPE
+     ---------------------------------------------------------- */
+
+  .desktop-hero h1 {
+    font-size: clamp(2.7rem, 4.4vw, 4.25rem);
+  }
+
+  .desktop-hero .intro-copy {
+    font-size: clamp(1.18rem, 1.65vw, 1.6rem);
+  }
+
+  .desktop-hero .intro-copy p + p {
+    margin-top: clamp(16px, 1.5vh, 22px);
+  }
+
+  .desktop-hero h2 {
+    font-size: clamp(1.65rem, 2.5vw, 2.45rem);
+  }
+
+  .desktop-hero .subheading {
+    font-size: clamp(1rem, 1.45vw, 1.35rem);
+  }
+
+  .desktop-hero .order-button {
+    font-size: clamp(0.72rem, 0.9vw, 0.88rem);
+  }
+
+  .desktop-hero .availability {
+    font-size: clamp(0.64rem, 0.8vw, 0.78rem);
+  }
+
+
+  /* ----------------------------------------------------------
+     DESKTOP FOOTER
+
+     It sits at the bottom when there is room,
+     but moves naturally below the content if necessary.
+     ---------------------------------------------------------- */
 
   .desktop-hero .page-footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: relative;
+    z-index: 3;
+
+    width: 100%;
+    margin-top: auto;
     padding: 14px 20px 16px;
+
     border-top: 1px solid rgba(164, 119, 50, 0.38);
+
+    background: rgba(245, 232, 213, 0.08);
+
     font-size: clamp(0.58rem, 0.75vw, 0.75rem);
   }
 
+
+  /* ----------------------------------------------------------
+     MEDIUM DESKTOP
+
+     Give the text more room before shrinking it.
+     ---------------------------------------------------------- */
+
   @media (max-width: 1100px) {
-    .desktop-hero { background-position: 58% center; }
-    .message { left: 3%; width: 53%; min-width: 360px; }
+
+    .desktop-hero {
+      background-position: 58% center;
+    }
+
+    .message {
+      width: min(53%, 570px);
+      margin-left: 3%;
+      padding-right: 1rem;
+      padding-left: 1rem;
+    }
   }
 
-  @media (max-height: 700px) {
+
+  /* ----------------------------------------------------------
+     SHORT SCREENS
+
+     Instead of scaling the whole message to 84%, reduce
+     vertical padding and spacing slightly.
+     ---------------------------------------------------------- */
+
+  @media (max-height: 700px) and (min-width: 900px) {
+
     .message {
-      top: 4.5%;
-      transform: scale(0.84);
-      transform-origin: top left;
-      width: 49%;
+      padding-top: 3rem;
+      padding-bottom: 2rem;
+    }
+
+    .desktop-hero .intro-copy p + p {
+      margin-top: 14px;
+    }
+
+    .desktop-hero .rule {
+      margin-top: 18px;
+      margin-bottom: 16px;
+    }
+
+    .desktop-hero .heart {
+      margin-top: 10px;
+    }
+
+    .desktop-hero .rule-bottom {
+      margin-top: 16px;
+      margin-bottom: 13px;
     }
   }
 }
 
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
 @media (prefers-reduced-motion: reduce) {
-  .order-button { transition: none; }
+  .order-button {
+    transition: none;
+  }
 }

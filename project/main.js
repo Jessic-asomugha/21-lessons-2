@@ -3,53 +3,179 @@ import './style.css'
 document.querySelector('#app').innerHTML = `
   <main class="page">
 
-    <!-- MOBILE: photo banner (text over its blank area, fading at the bottom) then a scrollable footer with the button and sign-off -->
+    <!-- MOBILE -->
     <div class="mobile-page">
       <div class="m-hero">
-        <img src="/hero-mobile-placeholder.png" alt="Book propped against a sunlit wall beside a candle, coffee, and a handwritten note. (Placeholder photo — final cover art to be swapped in.)">
+        <img src="/hero-mobile-placeholder.png" alt="Book propped against a sunlit wall beside a candle, coffee, and a handwritten note.">
+
         <div class="m-hero__text" aria-labelledby="page-title-m">
           <div class="ornament ornament-top" aria-hidden="true">✦</div>
-          <h1 id="page-title-m">Maybe it's for you.</h1>
-          <div class="rule" aria-hidden="true"><span>✦</span></div>
+
+          <h1 id="page-title-m">It all started with a thought.</h1>
+
+          <div class="rule" aria-hidden="true">
+            <span>✦</span>
+          </div>
+
           <div class="intro-copy">
-            <p>For the dreamer. The overthinker.<br />The one healing in silence.<br />The one trying again.<br />The one becoming.</p>
-            <p>If you've ever paused and asked<br /><em>"Is this all there is?"</em><br />— this book is for you.</p>
+            <p>
+              I was turning 21, and I thought—
+              <br />
+              <em>why not 21 lessons?</em>
+            </p>
+
+            <p>
+              They were things I had learned along the way,
+              things I had experienced, things I had watched,
+              things love taught me, things pain taught me,
+              and things I'm still learning through growth.
+            </p>
+
+            <p>
+              So I sat with them.
+            </p>
+
+            <p>
+              Some days the words came easily,
+              some days they didn't,
+              but I kept going.
+              And eventually, there were 21.
+            </p>
+
+            <p>
+              Once upon a time, they lived scattered across
+              my notes and journals.
+            </p>
+
+            <p>
+              Now, put together,
+              <br />
+              they can live in yours next.
+            </p>
+
+            <p>
+              Maybe there's a lesson for you, too.
+            </p>
           </div>
         </div>
       </div>
 
       <div class="m-footer">
         <div class="heart" aria-hidden="true">♡</div>
-        <h2>Take this book with you.</h2>
-        <p class="subheading"><em>Let it find you in the moments you need it most.</em></p>
-        <div class="rule rule-bottom" aria-hidden="true"><span>✦</span></div>
-        <a class="order-button" href="#preorder">PRE-ORDER YOUR COPY <span aria-hidden="true">♡</span></a>
-        <p class="availability"><span aria-hidden="true">✧</span> AVAILABLE SOON <span aria-hidden="true">✧</span></p>
+
+        <h2>Take the book with you.</h2>
+
+        <p class="subheading">
+          <em>Enjoy the journey.</em>
+        </p>
+
+        <div class="rule rule-bottom" aria-hidden="true">
+          <span>✦</span>
+        </div>
+
+        <a class="order-button" href="#preorder">
+          Take the book with you <span aria-hidden="true">♡</span>
+        </a>
+
+        <p class="availability">
+          <span aria-hidden="true">✧</span>
+          Thanks for stopping by.
+          <span aria-hidden="true">✧</span>
+        </p>
       </div>
 
-      <footer class="page-footer mobile-footer">THANK YOU FOR BEING HERE. <span aria-hidden="true">✦</span> KEEP BECOMING.</footer>
+      <footer class="page-footer mobile-footer">
+        <i>Thanks for stopping by.</i>
+        <span aria-hidden="true">✦</span>
+        Jess.
+      </footer>
     </div>
 
-    <!-- DESKTOP: original full-bleed, single-viewport hero, unchanged -->
+
+    <!-- DESKTOP -->
     <section class="desktop-hero">
+
       <div class="message" aria-labelledby="page-title-d">
+
         <div class="ornament ornament-top" aria-hidden="true">✦</div>
-        <h1 id="page-title-d">Maybe it's for you.</h1>
-        <div class="rule" aria-hidden="true"><span>✦</span></div>
+
+        <h1 id="page-title-d">It all started with a thought.</h1>
+
+        <div class="rule" aria-hidden="true">
+          <span>✦</span>
+        </div>
 
         <div class="intro-copy">
-          <p>For the dreamer. The overthinker.<br />The one healing in silence.<br />The one trying again.<br />The one becoming.</p>
-          <p>If you've ever paused and asked<br /><em>"Is this all there is?"</em><br />— this book is for you.</p>
+
+          <p>
+            I was turning 21, and I thought—
+            <br />
+            <em>why not 21 lessons?</em>
+          </p>
+
+          <p>
+            They were things I had learned along the way,
+            things I had experienced, things I had watched,
+            things love taught me, things pain taught me,
+            and things I'm still learning through growth.
+          </p>
+
+          <p>
+            So I sat with them.
+          </p>
+
+          <p>
+            Some days the words came easily,
+            some days they didn't,
+            but I kept going.
+            And eventually, there were 21.
+          </p>
+
+          <p>
+            Once upon a time, they lived scattered across
+            my notes and journals.
+          </p>
+
+          <p>
+            Now, put together, they can live in yours next.
+          </p>
+
+          <p>
+            Maybe there's a lesson for you, too.
+          </p>
+
         </div>
 
         <div class="heart" aria-hidden="true">♡</div>
-        <h2>Take this book with you.</h2>
-        <p class="subheading"><em>Let it find you in the moments you need it most.</em></p>
-        <div class="rule rule-bottom" aria-hidden="true"><span>✦</span></div>
-        <a class="order-button" href="#preorder">PRE-ORDER YOUR COPY <span aria-hidden="true">♡</span></a>
-        <p class="availability"><span aria-hidden="true">✧</span> AVAILABLE SOON <span aria-hidden="true">✧</span></p>
+
+        <h2>Take the book with you.</h2>
+
+        <p class="subheading">
+          <em>Enjoy the journey.</em>
+        </p>
+
+        <div class="rule rule-bottom" aria-hidden="true">
+          <span>✦</span>
+        </div>
+
+        <a class="order-button" href="#preorder">
+          Take the book with you <span aria-hidden="true">♡</span>
+        </a>
+
+        <p class="availability">
+          <span aria-hidden="true">✧</span>
+          Thanks for stopping by.
+          <span aria-hidden="true">✧</span>
+        </p>
+
       </div>
-      <footer class="page-footer">THANK YOU FOR BEING HERE. <span aria-hidden="true">✦</span> KEEP BECOMING.</footer>
+
+      <footer class="page-footer">
+        Thanks for stopping by.
+        <span aria-hidden="true">✦</span>
+        Jess.
+      </footer>
+
     </section>
 
   </main>
