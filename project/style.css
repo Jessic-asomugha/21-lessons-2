@@ -208,16 +208,16 @@ h2 {
 }
 .m-hero__text {
   position: absolute;
-  top: 7.5%;
-  left: 8vw;
-  right: 10vw;
+  top: 4.5%;
+  left: 2vw;
+  right: 8vw;
   text-align: left;
   line-height: normal;
 }
 
 .brand-mark {
   position: absolute;
-  top: 4%;
+  top: 1%;
   left: 0;
   right: 0;
   display: flex;
@@ -236,7 +236,7 @@ h2 {
 }
 
 .m-hero__text .ornament {
-  margin-bottom: 2.4vw;
+  margin-bottom: 1.6vw;
 }
 
 .m-hero__text h1 {
@@ -244,11 +244,10 @@ h2 {
 }
 
 .m-hero__text > .rule {
-  margin-top: 4vw;
-  margin-bottom: 4.4vw;
+  margin-top: 2.4vw;
+  margin-bottom: 2.6vw;
   margin-left: 0;
 }
-
 .sparkle {
   position: absolute;
   color: #ad7d2b;
@@ -261,11 +260,11 @@ h2 {
 
 .m-hero__text .intro-copy {
   font-size: 3.7vw;
-  line-height: 1.32;
+  line-height: 1.26;
 }
 
 .m-hero__text .intro-copy p + p {
-  margin-top: 2.2vw;
+  margin-top: 1.4vw;
 }
 
 .m-hero__text .lesson-line {
