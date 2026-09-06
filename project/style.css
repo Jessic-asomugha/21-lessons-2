@@ -166,20 +166,11 @@ h2 {
 /* ============================================================
    MOBILE
    Composition:
-   1. Title on the clean cream background
-   2. Cropped photograph
-   3. Photograph fades at the bottom
-   4. Story continues on the cream background
-   5. CTA / sign-off follows
-
-   No HTML changes are required. The existing .m-hero__text
-   becomes display: contents so its children can be reordered
-   visually with CSS Grid.
-   ============================================================ */
-/* ============================================================
-   MOBILE
-   Final CSS-only test:
-   title → story → cropped image → fade → CTA
+   1. One continuous photo — blank wall at the top, flowing
+      naturally down into the book / candle / coffee / note
+   2. Text overlaid directly on the photo's blank top area
+   3. The photo fades into the page background near the bottom
+   4. Button + sign-off follow, on the plain page background
    ============================================================ */
 
 .desktop-hero {
@@ -189,7 +180,6 @@ h2 {
 .mobile-page {
   display: block;
   width: 100%;
-  min-height: 100svh;
   overflow-x: hidden;
   text-align: center;
   background: #f5e8d5;
@@ -197,158 +187,139 @@ h2 {
 
 
 /* ------------------------------------------------------------
-   MOBILE HERO
+   MOBILE HERO — single full-bleed photo with text overlaid
    ------------------------------------------------------------ */
 
 .m-hero {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr;
   width: 100%;
-  overflow: hidden;
-  background: #f5e8d5;
+  line-height: 0; /* removes the inline-image gap under the photo */
+}
+
+.m-hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  /* Fades the last stretch of the photo into the page background
+     so the seam into the button section below is invisible. */
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 86%, transparent 100%);
+}
+.m-hero__text {
+  position: absolute;
+  top: 7.5%;
+  left: 8vw;
+  right: 10vw;
+  text-align: left;
   line-height: normal;
 }
 
-
-/* Let title, rule, and story become separate grid items */
-.m-hero__text {
-  display: contents;
+.brand-mark {
+  position: absolute;
+  top: 4%;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #ad7d2b;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 3.6vw;
+  letter-spacing: 0.16em;
 }
 
-
-/* ------------------------------------------------------------
-   TITLE
-   ------------------------------------------------------------ */
+.brand-leaf {
+  flex-shrink: 0;
+}
 
 .m-hero__text .ornament {
-  order: 1;
-  margin-top: 7vh;
-  margin-bottom: 14px;
-  padding: 0 8vw;
+  margin-bottom: 2.4vw;
 }
 
 .m-hero__text h1 {
-  order: 2;
-  padding: 0 8vw;
-  font-size: clamp(2.35rem, 9vw, 3.2rem);
+  font-size: 8.4vw;
 }
 
 .m-hero__text > .rule {
-  order: 3;
-  margin-top: 22px;
-  margin-bottom: 24px;
+  margin-top: 4vw;
+  margin-bottom: 4.4vw;
+  margin-left: 0;
 }
 
+.sparkle {
+  position: absolute;
+  color: #ad7d2b;
+  font-size: 3.4vw;
+  opacity: 0.85;
+}
 
-/* ------------------------------------------------------------
-   STORY
-   ------------------------------------------------------------ */
+.sparkle-a { top: 30vw; right: 8vw; }
+.sparkle-b { top: 38vw; right: 16vw; font-size: 2.6vw; }
 
 .m-hero__text .intro-copy {
-  order: 4;
-
-  width: 100%;
-  max-width: 540px;
-  margin: 0 auto;
-  padding: 0 9vw 5vh;
-
-  background: #f5e8d5;
-
-  font-size: clamp(1.05rem, 4.1vw, 1.35rem);
-  line-height: 1.38;
+  font-size: 3.7vw;
+  line-height: 1.32;
 }
 
 .m-hero__text .intro-copy p + p {
-  margin-top: 18px;
+  margin-top: 2.2vw;
+}
+
+.m-hero__text .lesson-line {
+  margin-top: 4vw;
 }
 
 
 /* ------------------------------------------------------------
-   CROPPED IMAGE
-   ------------------------------------------------------------ */
-
-.m-hero img {
-  order: 5;
-
-  display: block;
-  width: 100%;
-
-  /*
-    The image is intentionally shorter than its full height.
-    This crops away some of the blank wall while preserving
-    the important still-life lower portion.
-  */
-  height: clamp(360px, 92vw, 560px);
-
-  object-fit: cover;
-  object-position: center 72%;
-
-  /*
-    Only the final edge fades away.
-    The book, cup, note, flowers, pen, etc. remain visible.
-  */
-  -webkit-mask-image:
-    linear-gradient(
-      to bottom,
-      black 0%,
-      black 94%,
-      rgba(0, 0, 0, 0.82) 97%,
-      rgba(0, 0, 0, 0.45) 99%,
-      transparent 100%
-    );
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      black 0%,
-      black 94%,
-      rgba(0, 0, 0, 0.82) 97%,
-      rgba(0, 0, 0, 0.45) 99%,
-      transparent 100%
-    );
-}
-
-
-/* ------------------------------------------------------------
-   CTA
+   CTA — sits below the photo, on the plain page background
    ------------------------------------------------------------ */
 
 .m-footer {
   position: relative;
-  z-index: 3;
-
-  padding: 7vh 8vw 5vh;
-
+  padding: 3vh 8vw 5vh;
   background: #f5e8d5;
-}
-
-.m-footer h2 {
-  font-size: clamp(1.9rem, 7vw, 2.5rem);
-}
-
-.m-footer .subheading {
-  font-size: clamp(1rem, 4vw, 1.3rem);
 }
 
 .m-footer .order-button {
-  font-size: clamp(0.78rem, 3.4vw, 1rem);
-  padding: 13px 26px;
+  display: inline-block;
+  font-size: clamp(0.85rem, 3.6vw, 1rem);
+  padding: 13px 30px;
 }
 
 .m-footer .availability {
-  font-size: clamp(0.68rem, 2.8vw, 0.85rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: clamp(0.7rem, 2.9vw, 0.85rem);
 }
 
+.m-footer .leaf {
+  color: #ad7d2b;
+  flex-shrink: 0;
+}
 
-/* ------------------------------------------------------------
-   SIGN-OFF
-   ------------------------------------------------------------ */
+.m-footer .leaf-flip {
+  transform: scaleX(-1);
+}
+
+.m-footer .rule-bottom {
+  margin-top: 20px;
+  margin-bottom: 16px;
+}
 
 .mobile-footer {
-  padding: 0 20px 30px;
-  background: #f5e8d5;
-  font-size: clamp(0.68rem, 2.6vw, 0.8rem);
+  font-size: clamp(0.7rem, 2.7vw, 0.82rem);
+}
+
+.m-footer .laurel {
+  color: #ad7d2b;
+  opacity: 0.75;
+  margin-top: 18px;
 }
 /* ============================================================
    DESKTOP
